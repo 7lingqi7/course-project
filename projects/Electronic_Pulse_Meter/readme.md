@@ -11,4 +11,3 @@ C --> D[整形电路]
 D --> E[门控电路]
 E --> F[计数电路]
 F --> G[译码显示]
-![Back View](./physical%20circuit_back.jpg)
