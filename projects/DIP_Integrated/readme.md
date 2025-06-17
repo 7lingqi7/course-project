@@ -1,56 +1,57 @@
-# 🔍 Experiment 5: Real-Time Image Denoising with Convolutional Autoencoders
+# 🖼️ GUI-Based Image Denoising Application with Autoencoder
 
-This experiment implements a Convolutional Autoencoder (CAE) to denoise grayscale images. It trains the CAE to reconstruct clean images from noisy inputs and evaluates performance using PSNR metrics and visual comparisons.
-
----
-
-## 🧪 Workflow Overview
-
-### 📥 Data Preparation
-
-- Dataset: Grayscale images resized to 128×128
-- Preprocessing:
-  - Normalization to [0, 1]
-  - Gaussian noise added with mean = 0, variance = 0.01
-
-### 🧱 CAE Architecture
-
-- **Encoder**:
-  - Conv2D → ReLU → MaxPool (×2)
-- **Decoder**:
-  - Conv2D → ReLU → UpSampling (×2)
-- Output layer: Sigmoid activation to reconstruct normalized images
-
-### ⚙️ Training Setup
-
-- Loss: Binary Cross-Entropy (BCE)
-- Optimizer: Adam
-- Epochs: 50
-- Batch size: 64
-- GPU acceleration enabled
+This project builds a complete graphical user interface (GUI) application for real-time image denoising using a trained convolutional autoencoder (CAE). Users can load a noisy image and view the denoised result instantly via an interactive window.
 
 ---
 
-## 📈 Evaluation
+## 🧠 Core Features
 
-- PSNR used to evaluate image fidelity
-- Training loss steadily decreased, confirming convergence
-- Visual comparison shows effective noise removal, preserving structure
+### 🎛️ GUI Functionality
 
-| Sample | Input (Noisy) | Output (Denoised) |
-|--------|----------------|--------------------|
-| Img 1  | ![noisy1](./images/noisy1.png) | ![clean1](./images/clean1.png) |
-| Img 2  | ![noisy2](./images/noisy2.png) | ![clean2](./images/clean2.png) |
+- Built with `tkinter` for cross-platform compatibility
+- Functions:
+  - Load image from local storage
+  - Display original (noisy) image
+  - Denoise image via pre-trained model
+  - Show output in a separate canvas
+  - Save denoised image if needed
+
+### 🧱 Model Architecture (CAE)
+
+- Encoder:
+  - Conv2D layers with ReLU activation
+  - MaxPooling for spatial reduction
+- Decoder:
+  - Conv2D + UpSampling
+  - Sigmoid for final reconstruction
+- Trained on a custom noisy-clean grayscale dataset
+
+---
+
+## 🚀 Workflow
+
+1. Start GUI via `main.py`
+2. Click “Open Image” to select noisy input
+3. Preview shown in left panel
+4. Click “Denoise” to invoke the model
+5. Output displayed in right panel
+6. Optionally save result via “Save Image” button
 
 ---
 
 ## 📦 Libraries Used
 
-- `numpy`
-- `matplotlib`
-- `tensorflow.keras`
-  - `Model`, `Conv2D`, `MaxPooling2D`, `UpSampling2D`, `Input`
-- `skimage.util.random_noise`
-- `os`, `cv2`, `glob`
+- `tkinter` – GUI framework
+- `PIL` (Pillow) – Image loading/display
+- `numpy` – Image array manipulation
+- `cv2` – Preprocessing operations
+- `tensorflow.keras` – Model loading and prediction
+- `os`, `glob` – File management
 
+---
 
+## 📂 Files
+
+- `main.py` – Entry point and GUI logic
+- `model.h5` – Trained convolutional autoencoder
+- `/images/` – Sample input and output images
