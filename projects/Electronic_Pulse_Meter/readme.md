@@ -6,7 +6,15 @@
 项目综合应用了模拟电路、数字电路和EDA技术，包含完整的硬件设计、Multisim仿真和电路板实现。
 
 ---
+### Physical Circuit (Front and Back)
 
+**Back View:**  
+![Back](./physical%20circuit_back.jpg)
+
+**Front View:**  
+![Front](./physical%20circuit_front.jpg)
+
+---
 ### 🔧 信号处理流程图
 
 ```mermaid
@@ -18,11 +26,3 @@ D --> E[门控电路]
 E --> F[计数电路]
 F --> G[译码显示]
 ---
-```markdown
-### Physical Circuit (Front and Back)
-
-**Back View:**  
-![Back](./physical%20circuit_back.jpg)
-
-**Front View:**  
-![Front](./physical%20circuit_front.jpg)
