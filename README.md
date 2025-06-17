@@ -1,4 +1,4 @@
-<h1 align="center">📘 深圳大学文华荣誉班 · 课程实验与项目合集</h1>
+<h1 align="center">📘 深圳大学文华班 · 课程实验与项目合集</h1>
 <p align="center"><b>Shenzhen University Wenhua Honor Class · Coursework Experiments and Projects</b></p>
 
 <p align="center">
