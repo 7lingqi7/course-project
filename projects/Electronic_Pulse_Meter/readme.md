@@ -18,7 +18,7 @@ D --> E[门控电路]
 E --> F[计数电路]
 F --> G[译码显示]
 ---
-
+```markdown
 ### Physical Circuit (Front and Back)
 
 **Back View:**  
