@@ -143,8 +143,7 @@ cd course-project
 
 ## ✉️ 联系 Contact
 
-* Email: <[your\_email@example.com](mailto:your_email@example.com)>
-* WeChat: \<wechat\_id>
+* Email: <[2022110131@email.szu.edu.cn](mailto:your_email@example.com)>
 
 ---
 
