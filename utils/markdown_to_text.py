@@ -1,0 +1,129 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Markdown to Text Converter for Insurance Terms
+将保险条款从Markdown格式转换为纯文本格式
+"""
+
+import re
+
+
+def convert_markdown_to_text(markdown_content):
+    """
+    Convert markdown formatted text to plain text
+    
+    Args:
+        markdown_content (str): Markdown formatted text
+        
+    Returns:
+        str: Plain text without markdown formatting
+    """
+    # Remove markdown headers (# symbols)
+    text = re.sub(r'^#{1,6}\s+', '', markdown_content, flags=re.MULTILINE)
+    
+    # Remove bold formatting (**text** or __text__)
+    text = re.sub(r'\*\*(.+?)\*\*', r'\1', text)
+    text = re.sub(r'__(.+?)__', r'\1', text)
+    
+    # Remove italic formatting (*text* or _text_)
+    text = re.sub(r'\*(.+?)\*', r'\1', text)
+    text = re.sub(r'_(.+?)_', r'\1', text)
+    
+    # Remove links [text](url) -> text
+    text = re.sub(r'\[(.+?)\]\(.+?\)', r'\1', text)
+    
+    # Remove inline code `code` -> code
+    text = re.sub(r'`(.+?)`', r'\1', text)
+    
+    # Remove strikethrough ~~text~~ -> text
+    text = re.sub(r'~~(.+?)~~', r'\1', text)
+    
+    # Clean up extra whitespace
+    text = re.sub(r'\n\n+', '\n\n', text)
+    text = text.strip()
+    
+    return text
+
+
+def format_insurance_terms(markdown_content):
+    """
+    Format insurance terms from markdown to structured plain text
+    将保险条款从markdown格式转换为结构化纯文本
+    
+    Args:
+        markdown_content (str): Markdown formatted insurance terms
+        
+    Returns:
+        str: Formatted plain text insurance terms
+    """
+    # First convert markdown formatting
+    text = convert_markdown_to_text(markdown_content)
+    
+    # Format each numbered item as a paragraph
+    lines = text.split('\n')
+    formatted_lines = []
+    
+    for line in lines:
+        line = line.strip()
+        if line:
+            # Check if line starts with a number followed by period
+            if re.match(r'^\d+\.?\s+', line):
+                # Add a newline before each numbered item for readability
+                if formatted_lines:
+                    formatted_lines.append('')
+                formatted_lines.append(line)
+            else:
+                formatted_lines.append(line)
+    
+    return '\n'.join(formatted_lines)
+
+
+# Insurance terms content
+# Note: This text is provided as-is from the source material and may contain
+# formatting inconsistencies (e.g., item 11 uses full-width period) or typos
+INSURANCE_TERMS_MARKDOWN = """# 第一条：释义
+
+1. "享权人"是指平安健康保单约定的被保险人。  
+2. "享权事件"是指本确认函第2.2条规定的享权人有权申请服务的情形和条件。  
+3. "平安健康"是指平安健康保险股份有限公司。  
+4. "保单"是指由平安健康向投保人和/或被保险人出具的承保凭证。  
+5. "恐怖行为"是指任何人、团伙单独或者代表任何组织、政府或者与之有关为政治、宗教、政治形态、民族原因而实施的目的是对政府施加影响或者使公众、部分公众处于恐惧之中的行为，包括但不限于使用武力、暴力或者武力、暴力威胁。  
+6. "授权人"是指由平安健康书面指定的代表平安健康或被保险人来履行本确认函相关内容的代表。  
+7. "平安合作救援机构"，是指平安健康指定的针对本紧急救援服务中提供服务的合作救援机构，以下简称"救援机构"  
+8. "本国"是指国籍国。  
+9. "常住国"或"国内"是指中华人民共和国境内（不包括中国台湾地区、中国香港和中国澳门特别行政区）。  
+10. "居住地"是指享权人最后确定并经平安健康确认的位于中华人民共和国大陆地区（不包括中国台湾地区、中国香港和中国澳门特别行政区）的居住城市，如未指定则默认为享权人持有的平安健康保单的签发的城市。  
+11．"工作地"是指享权人所在工作岗位对应的劳动合同中约定的履行地点，如未指定则默认为享权人持有的平安健康保单的签发的城市。  
+12. "救援服务限额"是指根据本确认函的规定，在任一事故下，在向享权人提供某项救援服务时，救援机构应当承担的第三方费用的最高金额。  
+13. "服务"或"服务类别"是指本确认函第四条规定的由救援机构提供的国际旅行救援服务、国际医疗救援服务和国内医疗救援服务。  
+14. "服务子项目"是指本确认函第 4.1 条、第 4.2 条和第 4.3 条规定的不同服务类别下设的具体服务项目。  
+15. "服务请求"是指享权人于享权事件发生时要求平安健康提供服务的意思表示。  
+16. "严重医疗状况"是指依照救援机构医生的意见，为了避免享权人死亡或者对享权人的健康造成直接或长期严重的损害而必须采取紧急治疗措施的一种病情。在判断是否存在严重医疗状况的时候，救援机构医生将考虑享权人所在的地理位置、医疗急诊的性质和事发地提供适当的医疗服务或医疗设施的可能性。  
+17. "既往病症"是指在本服务计划开始之前的十二个月内享权人曾经接受住院治疗的的任何医疗状况，或者在本服务计划开始前的六个月内享权人在正规的医疗机构处被诊断或治疗包括处方药的任何医疗状况。对于上一年度即为救援机构的享权人，此条不受限制。  
+18. "直系亲属"是指配偶、父母（公婆、岳父母）、子女及其配偶、祖父母、外祖父母、孙子女（外孙子女）及其配偶、兄弟、姐妹。  
+19. "第三方服务提供者"是指任何参与救援机构的服务提供网络中的成员，由救援机构向享权人推荐并且为享权人提供服务的独立运作的服务商，包括但不限于医院、诊所等。该类服务提供者并不被救援机构雇佣或控制而仅仅是救援机构的第三方服务提供网络中的一员。  
+20. "流行疫病"是指在某国家、地区或区域突然爆发并快速传播的传染性疾病。  
+21. "大规模流行疫病"是指在整个洲际大陆或整个人类中流行的传染性疾病。
+"""
+
+
+def main():
+    """Main function to convert and display the insurance terms"""
+    print("=" * 80)
+    print("保险条款 - Markdown格式转纯文本")
+    print("Insurance Terms - Markdown to Plain Text Conversion")
+    print("=" * 80)
+    print()
+    
+    # Convert to plain text
+    plain_text = format_insurance_terms(INSURANCE_TERMS_MARKDOWN)
+    
+    print(plain_text)
+    print()
+    print("=" * 80)
+    print("转换完成 / Conversion Complete")
+    print("=" * 80)
+
+
+if __name__ == '__main__':
+    main()
