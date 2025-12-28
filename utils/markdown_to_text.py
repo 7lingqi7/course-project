@@ -79,6 +79,8 @@ def format_insurance_terms(markdown_content):
 
 
 # Insurance terms content
+# Note: This text is provided as-is from the source material and may contain
+# formatting inconsistencies (e.g., item 11 uses full-width period) or typos
 INSURANCE_TERMS_MARKDOWN = """# 第一条：释义
 
 1. "享权人"是指平安健康保单约定的被保险人。  
